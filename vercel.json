@@ -10,6 +10,7 @@
     }
   },
   "rewrites": [
+    { "source": "/__/auth/:path*", "destination": "https://architect-ai-2f18e.firebaseapp.com/__/auth/:path*" },
     { "source": "/api/(.*)", "destination": { "service": "api" } },
     { "source": "/docs", "destination": { "service": "api" } },
     { "source": "/docs/(.*)", "destination": { "service": "api" } },
