@@ -69,6 +69,8 @@ Set these environment variables in Vercel before deploying:
 
 After the first deployment, add its exact hostname (without `https://`) in Firebase Authentication → Settings → Authorized domains. Add a custom domain there too if you use one. The JSON credential and OpenAI key must never be committed or placed in `VITE_*` variables.
 
+Use the stable production domain when sharing the app. Vercel creates a different per-commit URL for every deployment; the frontend redirects those URLs to `VITE_VERCEL_PROJECT_PRODUCTION_URL` when Vercel provides it. Firebase and browser popup permissions apply to exact hostnames.
+
 If Google sign-in reports `auth/popup-blocked`, allow pop-ups for the deployed site in the browser's site settings, then retry the button. The browser controls that permission.
 
 Keep the OpenAI key and service-account file server-side. Do not commit `.env` files. The backend verifies Firebase ID tokens and scopes every project to the authenticated UID.
