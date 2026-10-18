@@ -49,7 +49,7 @@ If OpenAI returns HTTP 429, check the API key project's usage, balance, and rate
 
 ## Deploy on Vercel
 
-Import this repository into Vercel and select **Services** as the project framework. The root `vercel.json` builds `frontend/` and `backend/` as two services on one domain, with `/api/*` routed to FastAPI. Leave the project root at the repository root. The frontend uses the same domain for API calls in production, so do not set `VITE_API_BASE_URL` unless the API is deployed elsewhere.
+Import this repository into Vercel and select **Services** as the project framework. The root `vercel.json` builds `frontend/` and `backend/` as two services on one domain, with `/api/*` routed to FastAPI. API docs are at `/docs`. Leave the project root at the repository root. The frontend uses the same domain for API calls in production, so do not set `VITE_API_BASE_URL` unless the API is deployed elsewhere.
 
 Set these environment variables in Vercel before deploying:
 
@@ -68,6 +68,8 @@ Set these environment variables in Vercel before deploying:
 | `VITE_FIREBASE_MESSAGING_SENDER_ID` | Firebase web app messaging sender ID |
 
 After the first deployment, add its exact hostname (without `https://`) in Firebase Authentication → Settings → Authorized domains. Add a custom domain there too if you use one. The JSON credential and OpenAI key must never be committed or placed in `VITE_*` variables.
+
+If Google sign-in reports `auth/popup-blocked`, allow pop-ups for the deployed site in the browser's site settings, then retry the button. The browser controls that permission.
 
 Keep the OpenAI key and service-account file server-side. Do not commit `.env` files. The backend verifies Firebase ID tokens and scopes every project to the authenticated UID.
 

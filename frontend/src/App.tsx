@@ -43,7 +43,16 @@ function AuthScreen() {
   async function google() {
     setBusy(true); setError("");
     try { await signInGoogle(); }
-    catch (cause) { setError(cause instanceof Error ? cause.message : "Google sign-in failed"); }
+    catch (cause) {
+      const code = cause && typeof cause === "object" && "code" in cause ? String(cause.code) : "";
+      if (code === "auth/popup-blocked") {
+        setError("Your browser blocked Google sign-in. Allow pop-ups for this site in the address bar, then try again.");
+      } else if (code === "auth/unauthorized-domain") {
+        setError("This site's domain must be added to Firebase Authentication's authorized domains.");
+      } else {
+        setError(cause instanceof Error ? cause.message : "Google sign-in failed");
+      }
+    }
     finally { setBusy(false); }
   }
 
