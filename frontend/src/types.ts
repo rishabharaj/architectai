@@ -1,0 +1,22 @@
+export type Option = { label: string; description: string };
+export type Question = { id: string; category: string; question: string; options: Option[]; suggestions: string[] };
+export type Answer = { question_id: string; category: string; selection: string };
+export type ArchitectureEntry = { category: string; selection: string; details?: Record<string, string[]> };
+export type Step = { step: number; title: string; description: string };
+export type Guide = { projectStructure: string[]; implementationSteps: Step[]; deploymentSteps: string[]; envVars: string[] };
+export type Project = {
+  id: string;
+  name: string;
+  idea: string;
+  phase: "deciding" | "complete";
+  questions: Question[];
+  answers: Answer[];
+  architecture: ArchitectureEntry[];
+  completed_categories: string[];
+  remaining_categories: string[];
+  current_index: number;
+  guide: Guide | null;
+  createdAt: string;
+  updated_at: string;
+};
+export type ChatMessage = { id: string; role: "user" | "assistant"; content: string; created_at: string };

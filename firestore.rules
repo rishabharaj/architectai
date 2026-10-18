@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // The React client only uses Firebase Authentication. FastAPI accesses
+    // Firestore with the Admin SDK after verifying the user's ID token.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
